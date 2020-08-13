@@ -10,39 +10,41 @@ class CardsPage extends StatefulWidget {
 class _CardsPageState extends State<CardsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Tarjetas')),
-        body: ListView(
-          // physics: BouncingScrollPhysics(),
-          children: [
-            _body(),
-            SizedBox(height: 10),
-            _body(),
-            SizedBox(height: 100),
-            Container(
-              height: 100,
-              margin: EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.red.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 20,
-                        offset: Offset(0, 5))
-                  ]),
-            ),
-            SizedBox(height: 100),
-            _body(),
-            SizedBox(height: 10),
-            _body(),
-            SizedBox(height: 10),
-            _body(),
-            SizedBox(height: 10),
-          ],
-        ),
-        backgroundColor: Colors.grey[200]);
+    return SafeArea(
+      child: Scaffold(
+          // appBar: AppBar(title: Text('Tarjetas')),
+          body: ListView(
+            // physics: BouncingScrollPhysics(),
+            children: [
+              _body(),
+              SizedBox(height: 10),
+              _body(),
+              SizedBox(height: 100),
+              Container(
+                height: 100,
+                margin: EdgeInsets.only(left: 20, right: 20),
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.red.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 20,
+                          offset: Offset(0, 5))
+                    ]),
+              ),
+              SizedBox(height: 100),
+              _body(),
+              SizedBox(height: 10),
+              _body(),
+              SizedBox(height: 10),
+              _body(),
+              SizedBox(height: 10),
+            ],
+          ),
+          backgroundColor: Colors.grey[200]),
+    );
   }
 
   Widget _body() {
