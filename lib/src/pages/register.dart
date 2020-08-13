@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:seminario_02/src/utils/globals.dart' as utils;
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   double _sizeHeight;
   double _sizeWidth;
   String _email;
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       margin: EdgeInsets.only(top: 40),
       child: Align(
         alignment: Alignment.topCenter,
-        child: Icon(Icons.touch_app,
+        child: Icon(Icons.account_circle,
             size: 150, color: Color.fromRGBO(255, 255, 255, 0.8)),
       ),
     );
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(children: [
-            Text('INCIAR SESIÓN',
+            Text('REGÍSTRATE',
                 style: TextStyle(fontSize: 20, color: Colors.grey)),
             SizedBox(height: 20),
             // TextFormField(
@@ -113,21 +113,11 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(10)),
                 onPressed: _sendForm,
                 child: Text(
-                  'ENTRAR',
+                  'REGISTRARME',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            FlatButton(
-                // onPressed: () => Navigator.pushNamed(context, 'register'),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'register');
-                },
-                child: Text(
-                  'REGISTRARME',
-                  style: TextStyle(color: utils.primaryColor()),
-                ))
           ]),
         ),
       ),

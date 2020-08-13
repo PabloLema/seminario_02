@@ -6,6 +6,8 @@ import 'package:seminario_02/src/pages/inputs.dart';
 import 'package:seminario_02/src/pages/login.dart';
 import 'package:seminario_02/src/pages/menu/bottom_menu.dart';
 import 'package:seminario_02/src/pages/profile.dart';
+import 'package:seminario_02/src/pages/register.dart';
+import 'package:seminario_02/src/pages/sliders/sliders.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
@@ -16,5 +18,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'cards': (BuildContext context) => CardsPage(),
     'profile': (BuildContext context) => ProfilePage(),
     'login': (BuildContext context) => LoginPage(),
+    'register': (BuildContext context) => RegisterPage(),
+    'sliders': (BuildContext context) => SlidersPage(),
   };
 }

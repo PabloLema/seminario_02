@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Seminario 02',
         routes: getApplicationRoutes(),
-        initialRoute: 'login',
+        initialRoute: 'sliders',
         theme: ThemeData(
           // primaryColor: Colors.indigo,
           // accentColor: Colors.pink,
