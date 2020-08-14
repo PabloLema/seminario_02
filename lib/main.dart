@@ -11,7 +11,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  Preferences _preferences = Preferences();
+  final Preferences _preferences = Preferences();
   @override
   Widget build(BuildContext context) {
     print(_preferences.token);
