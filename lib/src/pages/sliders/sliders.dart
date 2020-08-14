@@ -105,12 +105,12 @@ class _SlidersPageState extends State<SlidersPage> {
             margin: EdgeInsets.only(bottom: 20),
             child: ButtonTheme(
               minWidth: 300,
-              height: 50,
+              height: 40,
               child: FlatButton(
                 color: utils.primaryColor(),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
-                onPressed: () {},
+                onPressed: () => Navigator.popAndPushNamed(context, 'login'),
                 child: Text(
                   'EMPEZAR',
                   style: TextStyle(color: Colors.white),

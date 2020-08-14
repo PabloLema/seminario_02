@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:seminario_02/src/providers/preferences.dart';
 import 'package:seminario_02/src/routes/routes.dart';
 import 'package:seminario_02/src/utils/globals.dart' as utils;
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final _preferences = Preferences();
+  await _preferences.initPreferences();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  Preferences _preferences = Preferences();
   @override
   Widget build(BuildContext context) {
+    print(_preferences.token);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Seminario 02',
         routes: getApplicationRoutes(),
-        initialRoute: 'sliders',
+        initialRoute: _preferences.token == '' ? 'sliders' : 'bottom_menu',
         theme: ThemeData(
           // primaryColor: Colors.indigo,
           // accentColor: Colors.pink,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seminario_02/src/providers/api.dart';
 import 'package:seminario_02/src/utils/globals.dart' as utils;
 
 class LoginPage extends StatefulWidget {
@@ -9,11 +10,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final ApiProvider _apiProvider = new ApiProvider();
+
   double _sizeHeight;
   double _sizeWidth;
   String _email;
   String _password;
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     _sizeHeight = MediaQuery.of(context).size.height;
@@ -134,12 +137,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _sendForm() {
+  _sendForm() async {
     _formKey.currentState.save();
     final body = {
       'email': _email,
       'password': _password,
     };
-    print(body);
+    final data = await _apiProvider.login(body);
+    print(data);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final String url = 'https://github.com/api';
+final String url = 'http://157.245.116.71:3020';
 
 Color primaryColor() {
   return Color.fromRGBO(50, 80, 199, 1);
