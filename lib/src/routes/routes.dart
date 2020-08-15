@@ -10,6 +10,7 @@ import 'package:seminario_02/src/pages/product_detail.dart';
 import 'package:seminario_02/src/pages/profile.dart';
 import 'package:seminario_02/src/pages/register.dart';
 import 'package:seminario_02/src/pages/sliders/sliders.dart';
+import 'package:seminario_02/src/pages/swipe/swipe_items.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
@@ -24,5 +25,6 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'sliders': (BuildContext context) => SlidersPage(),
     'product_detail': (BuildContext context) => ProductDetailPage(),
     'product': (BuildContext context) => ProductPage(),
+    'swipe': (BuildContext context) => SwipeExamplePage(),
   };
 }
