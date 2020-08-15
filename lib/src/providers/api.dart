@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:seminario_02/src/providers/preferences.dart';
 import 'package:seminario_02/src/utils/globals.dart' as utils;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class ApiProvider {
   Preferences _preferences = Preferences();
@@ -28,6 +31,8 @@ class ApiProvider {
   }
 
   Future<dynamic> getProductList() async {
+    // final headers = {'Authorization': '${_preferences.token}'};
+    // final response = await http.get('${utils.url}/products', headers: headers);
     final response = await http.get('${utils.url}/products');
     final statusCode = response.statusCode;
     if (statusCode == 200) {
@@ -35,6 +40,38 @@ class ApiProvider {
       return data['list'];
     } else {
       return [];
+    }
+  }
+
+  Future<dynamic> postProduct(dynamic body, File image) async {
+    Dio dio = Dio();
+    dio.options.headers['Authorization'] = '${_preferences.token}';
+    if (image != null) {
+      String fileName = image.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        'title': body['title'],
+        'description': body['description'],
+        'value': body['value'],
+        'img': await MultipartFile.fromFile(image.path, filename: fileName),
+      });
+      final response = await dio.post('${utils.url}/product', data: formData);
+      if (response.statusCode == 200) {
+        return 200;
+      } else {
+        return 400;
+      }
+    } else {
+      FormData formData = FormData.fromMap({
+        'title': body['title'],
+        'description': body['description'],
+        'value': body['value'],
+      });
+      final response = await dio.post('${utils.url}/product', data: formData);
+      if (response.statusCode == 200) {
+        return 200;
+      } else {
+        return 400;
+      }
     }
   }
 }
