@@ -21,13 +21,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     _sizeHeight = MediaQuery.of(context).size.height;
     _sizeWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: utils.primaryColor(),
-        body: Stack(
-          children: [_topBody(), _bottomBody()],
+        body: SafeArea(
+          bottom: false,
+          child: Stack(
+            children: [_topBody(), _bottomBody()],
+          ),
         ),
-      ),
     );
   }
 

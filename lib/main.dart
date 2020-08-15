@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Seminario 02',
         routes: getApplicationRoutes(),
-        initialRoute: _preferences.token == '' ? 'login' : 'bottom_menu',
+        initialRoute: _preferences.token == '' ? 'sliders' : 'bottom_menu',
         theme: ThemeData(
           // primaryColor: Colors.indigo,
           // accentColor: Colors.pink,

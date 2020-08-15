@@ -33,7 +33,7 @@ class ApiProvider {
   Future<dynamic> getProductList() async {
     // final headers = {'Authorization': '${_preferences.token}'};
     // final response = await http.get('${utils.url}/products', headers: headers);
-    final response = await http.get('${utils.url}/products');
+    final response = await http.get('${utils.url}/products/desc');
     final statusCode = response.statusCode;
     if (statusCode == 200) {
       final data = json.decode(response.body);

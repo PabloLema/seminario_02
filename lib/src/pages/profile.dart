@@ -12,8 +12,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final Preferences _preferences = Preferences();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Perfil'),
       ),
@@ -24,6 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 _preferences.token = '';
                 Navigator.popAndPushNamed(context, 'login');
               })),
-    ));
+    );
   }
 }

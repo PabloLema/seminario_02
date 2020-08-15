@@ -13,21 +13,22 @@ class _CardsPageState extends State<CardsPage> {
   final _api = ApiProvider();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: FutureBuilder(
-              future: _api.getProductList(),
-              builder: (context, snap) {
-                if (snap.hasData) {
-                  return ListView.builder(
-                      itemCount: snap.data.length,
-                      itemBuilder: (context, i) {
-                        return _body(snap.data[i]);
-                      });
-                } else {
-                  return Container();
-                }
-              }),
+    return Scaffold(
+          body: SafeArea(
+            child: FutureBuilder(
+                future: _api.getProductList(),
+                builder: (context, snap) {
+                  if (snap.hasData) {
+                    return ListView.builder(
+                        itemCount: snap.data.length,
+                        itemBuilder: (context, i) {
+                          return _body(snap.data[i]);
+                        });
+                  } else {
+                    return Container();
+                  }
+                }),
+          ),
           // appBar: AppBar(title: Text('Tarjetas')),
           // body: ListView(
           // physics: BouncingScrollPhysics(),
@@ -49,8 +50,7 @@ class _CardsPageState extends State<CardsPage> {
           // ),
           // ],
           // ),
-          backgroundColor: Colors.grey[200]),
-    );
+          backgroundColor: Colors.grey[200]);
   }
 
   Widget _body(dynamic product) {
