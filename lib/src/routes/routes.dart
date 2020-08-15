@@ -5,6 +5,8 @@ import 'package:seminario_02/src/pages/home.dart';
 import 'package:seminario_02/src/pages/inputs.dart';
 import 'package:seminario_02/src/pages/login.dart';
 import 'package:seminario_02/src/pages/menu/bottom_menu.dart';
+import 'package:seminario_02/src/pages/product.dart';
+import 'package:seminario_02/src/pages/product_detail.dart';
 import 'package:seminario_02/src/pages/profile.dart';
 import 'package:seminario_02/src/pages/register.dart';
 import 'package:seminario_02/src/pages/sliders/sliders.dart';
@@ -20,5 +22,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'login': (BuildContext context) => LoginPage(),
     'register': (BuildContext context) => RegisterPage(),
     'sliders': (BuildContext context) => SlidersPage(),
+    'product_detail': (BuildContext context) => ProductDetailPage(),
+    'product': (BuildContext context) => ProductPage(),
   };
 }

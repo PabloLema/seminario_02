@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seminario_02/src/providers/preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key}) : super(key: key);
@@ -8,6 +9,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final Preferences _preferences = Preferences();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,6 +17,13 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: Text('Perfil'),
       ),
+      body: Center(
+          child: FlatButton(
+              child: Text('Cerrar Sesión'),
+              onPressed: () {
+                _preferences.token = '';
+                Navigator.popAndPushNamed(context, 'login');
+              })),
     ));
   }
 }

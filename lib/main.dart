@@ -11,15 +11,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  Preferences _preferences = Preferences();
+  final Preferences _preferences = Preferences();
   @override
   Widget build(BuildContext context) {
-    print(_preferences.token);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Seminario 02',
         routes: getApplicationRoutes(),
-        initialRoute: _preferences.token == '' ? 'sliders' : 'bottom_menu',
+        initialRoute: _preferences.token == '' ? 'login' : 'bottom_menu',
         theme: ThemeData(
           // primaryColor: Colors.indigo,
           // accentColor: Colors.pink,

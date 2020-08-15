@@ -19,7 +19,7 @@ class _BottomMenuPageState extends State<BottomMenuPage> {
       body: _pages(),
       bottomNavigationBar: _bottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, 'product'),
         child: Icon(
           Icons.add,
           color: Colors.white,

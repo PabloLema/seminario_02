@@ -144,6 +144,11 @@ class _LoginPageState extends State<LoginPage> {
       'password': _password,
     };
     final data = await _apiProvider.login(body);
-    print(data);
+    if (data == 200) {
+      // Navegacion
+      Navigator.popAndPushNamed(context, 'bottom_menu');
+    } else {
+      // Mensaje de error
+    }
   }
 }

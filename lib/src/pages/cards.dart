@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seminario_02/src/providers/api.dart';
+import 'package:seminario_02/src/utils/globals.dart' as utils;
 
 class CardsPage extends StatefulWidget {
   CardsPage({Key key}) : super(key: key);
@@ -8,51 +10,64 @@ class CardsPage extends StatefulWidget {
 }
 
 class _CardsPageState extends State<CardsPage> {
+  final _api = ApiProvider();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          body: FutureBuilder(
+              future: _api.getProductList(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  return ListView.builder(
+                      itemCount: snap.data.length,
+                      itemBuilder: (context, i) {
+                        return _body(snap.data[i]);
+                      });
+                } else {
+                  return Container();
+                }
+              }),
           // appBar: AppBar(title: Text('Tarjetas')),
-          body: ListView(
-            // physics: BouncingScrollPhysics(),
-            children: [
-              _body(),
-              SizedBox(height: 10),
-              _body(),
-              SizedBox(height: 100),
-              Container(
-                height: 100,
-                margin: EdgeInsets.only(left: 20, right: 20),
-                decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.red.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 20,
-                          offset: Offset(0, 5))
-                    ]),
-              ),
-              SizedBox(height: 100),
-              _body(),
-              SizedBox(height: 10),
-              _body(),
-              SizedBox(height: 10),
-              _body(),
-              SizedBox(height: 10),
-            ],
-          ),
+          // body: ListView(
+          // physics: BouncingScrollPhysics(),
+          // children: [
+          // _body(),
+          // Container(
+          //   height: 100,
+          //   margin: EdgeInsets.only(left: 20, right: 20),
+          //   decoration: BoxDecoration(
+          //       color: Colors.red,
+          //       borderRadius: BorderRadius.all(Radius.circular(25)),
+          //       boxShadow: [
+          //         BoxShadow(
+          //             color: Colors.red.withOpacity(0.5),
+          //             spreadRadius: 3,
+          //             blurRadius: 20,
+          //             offset: Offset(0, 5))
+          //       ]),
+          // ),
+          // ],
+          // ),
           backgroundColor: Colors.grey[200]),
     );
   }
 
-  Widget _body() {
-    return Column(
-        children: [_header(), _title(), _imgPost(), _descriptionPost()]);
+  Widget _body(dynamic product) {
+    return GestureDetector(
+        child: Column(children: [
+          _header(product),
+          _title(product['title']),
+          _imgPost(product['img'], product['_id']),
+          _descriptionPost(product['description']),
+          SizedBox(height: 10)
+        ]),
+        onTap: () {
+          Navigator.pushNamed(context, 'product_detail', arguments: product);
+        });
   }
 
-  Widget _header() {
+  Widget _header(dynamic product) {
     return Container(
       // color: Colors.white,
       padding: EdgeInsets.all(10),
@@ -64,9 +79,9 @@ class _CardsPageState extends State<CardsPage> {
         children: [
           CircleAvatar(
             radius: 28,
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grey,
             backgroundImage:
-                NetworkImage('https://www.w3schools.com/howto/img_avatar.png'),
+                NetworkImage('${utils.url}/img/user/${product['user']['img']}'),
           ),
           Flexible(
             child: Container(
@@ -74,14 +89,14 @@ class _CardsPageState extends State<CardsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Name',
+                  Text(product['user']['name'],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   SizedBox(height: 2),
-                  Text('plema@ups.edu.ec'),
-                  Text('11/08/2020'),
+                  Text(product['user']['email']),
+                  Text(product['date']),
                 ],
               ),
             ),
@@ -91,7 +106,7 @@ class _CardsPageState extends State<CardsPage> {
     );
   }
 
-  Widget _title() {
+  Widget _title(dynamic title) {
     return Container(
         width: double.infinity,
         padding: EdgeInsets.all(10),
@@ -100,7 +115,7 @@ class _CardsPageState extends State<CardsPage> {
           children: [
             Icon(Icons.attach_file),
             Flexible(
-              child: Text('Titulos',
+              child: Text(title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
@@ -109,27 +124,28 @@ class _CardsPageState extends State<CardsPage> {
         ));
   }
 
-  Widget _imgPost() {
+  Widget _imgPost(dynamic img, dynamic id) {
     return Container(
       height: 200,
       width: double.infinity,
-      child: FadeInImage(
-        fit: BoxFit.cover,
-        placeholder: AssetImage('assets/loading-animation.gif'),
-        image: NetworkImage(
-            'https://cnet2.cbsistatic.com/img/vbaEI3QxmYewrB7lzNkydFyHAVw=/940x0/2019/01/07/74dff4c7-23e1-4b75-aa58-3dbd171bba68/samsung-laptop-notebook-9-pro-ces-2019-0969.jpg'),
+      child: Hero(
+        tag: id,
+        child: FadeInImage(
+          fit: BoxFit.cover,
+          placeholder: AssetImage('assets/loading-animation.gif'),
+          image: NetworkImage('${utils.url}/img/product/$img'),
+        ),
       ),
     );
   }
 
-  Widget _descriptionPost() {
+  Widget _descriptionPost(dynamic description) {
     return Container(
+      width: double.infinity,
       color: Colors.white,
       padding: EdgeInsets.all(10),
-      child: Text(
-          'Ut officia excepteur excepteur nisi nulla commodo ut sint. Ut commodo labore dolore proident proident velit est elit ea ex amet enim. Veniam fugiat veniam culpa irure culpa.',
-          textAlign: TextAlign.justify,
-          style: TextStyle(fontSize: 18)),
+      child: Text(description,
+          textAlign: TextAlign.justify, style: TextStyle(fontSize: 18)),
     );
   }
 }
