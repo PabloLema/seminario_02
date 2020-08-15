@@ -22,13 +22,13 @@ class _LoginPageState extends State<LoginPage> {
     _sizeHeight = MediaQuery.of(context).size.height;
     _sizeWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: utils.primaryColor(),
-        body: SafeArea(
-          bottom: false,
-          child: Stack(
-            children: [_topBody(), _bottomBody()],
-          ),
+      backgroundColor: utils.primaryColor(),
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [_topBody(), _bottomBody()],
         ),
+      ),
     );
   }
 
